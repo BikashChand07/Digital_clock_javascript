@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital clock</title>
+    <style>
+      #clock {
+        font-size: 175px;
+        width: 900px;
+        margin: 200px;
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 20px;
+        background-color:black;
+        color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock">8:10:45</div>
+
+    <script>
+      // Calling showTime function at every second
+      setInterval(showTime, 1000);
+
+      // Defining showTime funcion
+      function showTime() {
+        let time = new Date(); // Getting current time and date
+        let hour = time.getHours();
+        let min = time.getMinutes();
+        let sec = time.getSeconds();
+        am_pm = "AM";
+
+        if (hour >= 12) {
+          // Setting time for 12 Hrs format
+          if (hour > 12) hour -= 12;
+          am_pm = "PM";
+        } else if (hour == 0) {
+          hr = 12;
+          am_pm = "AM";
+        }
+     /* Firstly, the getHours(), getMinutes() and getSeconds() methods return values between 0 to 23, 59, 59 respectively. The key point here is that single digit values are returned as # (eg: 7), however, in our clock, these values need to be displayed as ## (eg: 07).
+
+And to achieve this we use ternary operators. This operator returns a value if the condition is true and another value if it is false. I’ve added the syntax below.
+
+(condition ? if true : if false);*/
+
+        hour = hour < 10 ? "0" + hour : hour;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+
+        let currentTime = hour + ":" + min + ":" + sec + am_pm;
+        // Displaying the time
+        document.getElementById("clock").innerHTML = currentTime;
+      }
+
+      showTime();
+    </script>
+  </body>
+</html>
